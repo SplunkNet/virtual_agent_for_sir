@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element label="Language Processor" max_length="40" name="x_snc_vasir_language_processor" type="collection">
+        <element label="command" max_length="256" name="command" type="string"/>
+        <element label="Display" max_length="40" name="display" type="string"/>
+        <element label="Encoded Query" max_length="256" name="encoded_query" type="string"/>
+        <element label="Keywords" max_length="4000" name="keywords" type="string"/>
+        <element label="Name" max_length="40" name="name" type="string"/>
+        <element label="Need More Info" max_length="40" name="need_more_info" type="boolean"/>
+        <element label="Order" max_length="40" name="order" type="integer"/>
+        <element label="Prompt" max_length="32" name="prompt" reference="x_snc_vasir_return_messages" type="reference"/>
+        <element label="Regular Expression " max_length="256" name="regex" type="string"/>
+        <element label="Regex Group" max_length="40" name="regex_group" type="integer"/>
+        <element label="Table Name" max_length="40" name="table_name" type="string"/>
+        <element label="Variable name" max_length="40" name="variable_name" type="string"/>
+        <index name="index">
+            <element name="prompt"/>
+        </index>
+    </element>
+</database>

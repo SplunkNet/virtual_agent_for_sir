@@ -1,0 +1,622 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_cb_topic">
+    <sys_cb_topic action="INSERT_OR_UPDATE">
+        <applicability/>
+        <category display_value="">2986439cdb894090fd548ebe159619e1</category>
+        <connect_queue/>
+        <description/>
+        <flexible_conversation_switching>false</flexible_conversation_switching>
+        <graph>{
+  "graph_api_version": "1.0.13",
+  "goals": {
+    "748c2ff2d9484e4395bd3eb431ef783a": {
+      "id": "748c2ff2d9484e4395bd3eb431ef783a",
+      "trigger": {
+        "type": "primary"
+      },
+      "name": "primary",
+      "applicability": "",
+      "description": "",
+      "nodes": {
+        "3dcf0087f9524c668ba502348d2c57ee": {
+          "id": "3dcf0087f9524c668ba502348d2c57ee",
+          "stepType": "Start",
+          "name": "Start",
+          "greetingResponse": {
+            "value": "",
+            "mode": "simple"
+          }
+        },
+        "9a3883af0b49495cac3404f440cbce93": {
+          "id": "9a3883af0b49495cac3404f440cbce93",
+          "stepType": "TerminateGoal",
+          "name": "End",
+          "confirmationMessage": {
+            "mode": "simple",
+            "value": ""
+          }
+        },
+        "89411f478edb4e31aa468737a18ff866": {
+          "id": "89411f478edb4e31aa468737a18ff866",
+          "stepType": "Prompt",
+          "name": "Main Processor",
+          "prompt": {
+            "value": "(function execute() {\n    var prompt=\"\";\n    var cli = new cliForSIR();\n    if (vaVars.currentSIR!=\"\"){\n        var gr = new GlideRecord(\"sn_si_incident\");\n        if (gr.get(vaVars.currentSIR)){\n            prompt=cli.getMessage(105)+\" SIR No: \"+gr.number+\" is opened.\";\n        }\n        else{\n            prompt=cli.getMessage(105);\n        }\n    }\n    return prompt;\n})()\n",
+            "mode": "script"
+          },
+          "confirmMessage": {
+            "value": "",
+            "mode": "simple"
+          },
+          "acknowledgeMsg": {
+            "value": "",
+            "mode": "simple"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "optional": false,
+          "defaultValue": {
+            "value": "",
+            "mode": "simple"
+          },
+          "withNluUserInput": false,
+          "skipIfFulfilled": false,
+          "entity": "",
+          "variableId": "f845c792bdd448f69a56c0259ab700c6"
+        },
+        "faa9170bf80b49848f329f75b14e57b0": {
+          "id": "faa9170bf80b49848f329f75b14e57b0",
+          "stepType": "TextOutput",
+          "name": "CLI reposne",
+          "value": {
+            "value": "(function execute() {\n    var cli = new cliForSIR();\n    vaVars.cliEnabled=true;\n    return cli.getMessage(103);\n})()\n",
+            "mode": "script"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "ff3507290b3541e3bfd1c4ba635910b6": {
+          "id": "ff3507290b3541e3bfd1c4ba635910b6",
+          "stepType": "Prompt",
+          "name": "command",
+          "prompt": {
+            "value": "(function execute() {\n   var cli = new cliForSIR();\n   prompt=cli.getMessage(107);\n   return prompt;\n})()\n",
+            "mode": "script"
+          },
+          "confirmMessage": {
+            "value": "",
+            "mode": "simple"
+          },
+          "acknowledgeMsg": {
+            "value": "",
+            "mode": "simple"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "optional": false,
+          "defaultValue": {
+            "value": "",
+            "mode": "simple"
+          },
+          "withNluUserInput": false,
+          "skipIfFulfilled": false,
+          "entity": "",
+          "variableId": "724c919d30314a40a25514d52e89ed4b"
+        },
+        "f436b62ea73c43e298d5db0dd64d1d82": {
+          "id": "f436b62ea73c43e298d5db0dd64d1d82",
+          "name": "commandProcessor",
+          "script": "(function execute() {\n   \n    if (vaVars.command!=\"_skip\"){\n        gs.info(\"[VA for SIR] Command to process: \"+vaVars.command);\n        var cli = new cliForSIR();\n        if (vaVars.cliEnabled){\n            var ret=cli.commandCaller(vaInputs.command+\"\");\n        }\n        else{\n            var ret=cli.commandCaller(vaVars.command+\"\");\n        }\n        if (ret.hasOwnProperty('data')){\n            vaVars.commandProcessorResult=cli.dataHTMLFormater(ret);\n            //gs.info(\"Debug output \"+vaVars.command+\"reposne\" +JSON.stringify(ret)+\" and html \"+cli.dataHTMLFormater(ret));\n        }\n        else{\n            vaVars.commandProcessorResult=cli.getMessage(ret.message_id);\n        } \n         gs.info(\"[VA for SIR] Command reponse: \"+JSON.stringify(ret));\n    }\n})()\n",
+          "stepType": "ScriptAction",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "508871c0f79c4e779244fbe7f93df6a5": {
+          "id": "508871c0f79c4e779244fbe7f93df6a5",
+          "stepType": "TextOutput",
+          "name": "Command Response",
+          "value": {
+            "value": "{{vaVars.commandProcessorResult}}",
+            "mode": "simple"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "dd95fe5fc93f406fb98f24b4003f92f0": {
+          "id": "dd95fe5fc93f406fb98f24b4003f92f0",
+          "stepType": "Decision",
+          "name": "Is it \"exit\" command"
+        },
+        "a2c1e4a7397c440cbab14982878ed05a": {
+          "id": "a2c1e4a7397c440cbab14982878ed05a",
+          "stepType": "Decision",
+          "name": "Conversation switch"
+        },
+        "f3daa040b21245559ea226884a3fb183": {
+          "id": "f3daa040b21245559ea226884a3fb183",
+          "name": "commandPreProcessor",
+          "script": "(function execute() {\n    if (vaVars.command==\"_skip\"){\n        return;\n    }\n    var cli = new cliForSIR();\n    var tmpCommand = vaVars.conversationSwitch;\n    gs.info(\"[VA for SIR] Command to pre-process: \"+tmpCommand);\n    //replacing key variables\n    if (tmpCommand.search(\"{current_sir}\") != -1) {\n        if (vaVars.currentSIR != \"null\") {\n            tmpCommand = tmpCommand.replace(\"${current_sir}\", vaVars.currentSIR);\n        }\n        else{//sir needs to be opened\n            vaVars.command=\"_skip\";\n            vaVars.commandProcessorResult=cli.getMessage(108);\n            return;\n        }\n    }\n    if (tmpCommand.search(\"{current_user}\") != -1){\n        tmpCommand = tmpCommand.replace(\"${current_user}\", gs.getUserID());\n    }\n    if (vaVars.additionalInfo &amp;&amp; vaInputs.additional_info!=\"\"){\n      tmpCommand = tmpCommand.replace(\"$[\"+vaVars.variableName+\"]\", vaInputs.additional_info);\n    }\n    vaVars.command=tmpCommand;\n    \n    if (vaVars.command == \"opensir\") {\n        vaVars.currentSIR = vaInputs.additional_info;\n    }\n})()\n",
+          "stepType": "ScriptAction",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "c42ee7f1e2a746188f5eb7432cc4da77": {
+          "id": "c42ee7f1e2a746188f5eb7432cc4da77",
+          "name": "Language processor",
+          "script": "(function execute() {\n    var cli = new cliForSIR();\n    //wipe all variables except state variables\n    vaVars.additionalInfo=false;\n    vaVars.additionalInfoPrompt=\"\";\n    //vaVars.cliEnabled;\n    vaVars.command=\"\";\n    vaVars.commandProcessorResult=\"\";\n    vaVars.conversationSwitch=\"\";\n    //vaVars.currentSIR;\n    vaVars.noRecordMessage=\"\";\n    vaVars.queryDisplay=\"\";\n    vaVars.queryQuery=\"\";\n    vaVars.queryTable=\"\";\n    vaVars.variableName=\"\";\n\n    var ret=cli.languageProcessor(vaInputs.main_processor+\"\");\n    vaVars.conversationSwitch=ret.command;\n    gs.info(\"[VA for SIR] Language processor: \"+ret.command);\n    if (ret.hasOwnProperty('additionalInfo')){\n        vaVars.additionalInfo=ret.additionalInfo;\n        if (ret.additionalInfo){\n            vaVars.additionalInfoPrompt=ret.prompt;\n            vaVars.queryDisplay=ret.display;\n            vaVars.queryQuery=ret.encoded_query;\n            vaVars.queryTable=ret.table_name;\n            vaVars.variableName=ret.variable_name;\n        }\n    }\n    \n})()\n",
+          "stepType": "ScriptAction",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "96db71639efb449b8b90d27055ab5998": {
+          "id": "96db71639efb449b8b90d27055ab5998",
+          "stepType": "Decision",
+          "name": "Need more information?"
+        },
+        "37a52e56e7b64a1c9658e59412c294d9": {
+          "id": "37a52e56e7b64a1c9658e59412c294d9",
+          "stepType": "TextOutput",
+          "name": "Error",
+          "value": {
+            "value": "(function execute() {\n    var cli = new cliForSIR();\n    return cli.getMessage(101);\n})()\n",
+            "mode": "script"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          }
+        },
+        "3f112877d1a6476bae774e3a6e5fe6bb": {
+          "id": "3f112877d1a6476bae774e3a6e5fe6bb",
+          "stepType": "Decision",
+          "name": "Decision"
+        },
+        "f0e40515a74b42e08e0e8277772276e5": {
+          "stepType": "ReferenceChoicePrompt",
+          "name": "Additional info",
+          "prompt": {
+            "value": "{{vaVars.additionalInfoPrompt}}",
+            "mode": "simple"
+          },
+          "confirmMessage": {
+            "value": "",
+            "mode": "simple"
+          },
+          "acknowledgeMsg": {
+            "value": "",
+            "mode": "simple"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "optional": false,
+          "defaultValue": {
+            "value": "",
+            "mode": "simple"
+          },
+          "variableId": "5f1ff882f664404ab3889a8edcb9945c",
+          "id": "f0e40515a74b42e08e0e8277772276e5",
+          "mode": "external",
+          "script": "(function execute() {\n   gs.info(\"[VA for SIR] Addition info encoded query: \"+vaVars.queryQuery + \"in a table: \"+vaVars.queryTable);\n    var gr = new GlideRecord(vaVars.queryTable);\n    gr.addEncodedQuery(vaVars.queryQuery);\n    gr.setLimit(10);\n    gr.query();\n    var options = [];\n    if (gr.getRowCount()==0){\n        gs.info(\"[VA for SIR] Addition info no records\");\n        return [];  \n    }\n    var label = vaVars.queryDisplay;\n    var labelArray=label.split(\",\");\n   \n    while(gr.next()){\n        label=\"\";\n        for (var i in labelArray){\n            label+=gr[labelArray[i]]+\" \";\n        }\n        options.push({ 'value': gr.getValue(\"sys_id\"), 'label':label});\n    }\n    gs.info(\"[VA for SIR] Addition info options: \"+options);\n    return options;    \n})()\n",
+          "noRecordsResponseMsg": {
+            "value": "No records found",
+            "mode": "simple"
+          },
+          "condition": {
+            "value": "(function execute() {\n   gs.info(\"[VA for SIR] Addition info encoded query: \"+vaVars.queryQuery + \"in a table: \"+vaVars.queryTable);\n    var gr = new GlideRecord(vaVars.queryTable);\n    gr.addEncodedQuery(vaVars.queryQuery);\n    gr.setLimit(10);\n    gr.query();\n    var options = [];\n    if (gr.getRowCount()==0){\n        gs.info(\"[VA for SIR] Addition info no records\");\n        return [];  \n    }\n    var label = vaVars.queryDisplay;\n    var labelArray=label.split(\",\");\n   \n    while(gr.next()){\n        label=\"\";\n        for (var i in labelArray){\n            label+=gr[labelArray[i]]+\" \";\n        }\n        options.push({ 'value': gr.getValue(\"sys_id\"), 'label':label});\n    }\n    gs.info(\"[VA for SIR] Addition info options: \"+options);\n    return options;    \n})()\n",
+            "mode": "external_script"
+          },
+          "withNluUserInput": false,
+          "skipIfFulfilled": false,
+          "entity": ""
+        }
+      },
+      "edges": [
+        {
+          "id": "7305fca4398d4c719bafd96526499518",
+          "edgeType": "Branch",
+          "source": "96db71639efb449b8b90d27055ab5998",
+          "target": "f0e40515a74b42e08e0e8277772276e5",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "mode": "script",
+            "value": "(function execute() {\n    if (vaVars.additionalInfo==false){\n        return false;\n    }\n    else{\n        var gr = new GlideRecord(vaVars.queryTable);\n        gr.addEncodedQuery(vaVars.queryQuery);\n        gr.setLimit(10);\n        gr.query();\n        if (gr.getRowCount()==0){\n            return false\n        }\n        else{\n            return true;\n        }\n    }\n    \n     //yes\n   /* if (vaVars.additionalInfo==true){\n       return true; \n    }\n    else{\n        return false;\n    }*/\n})()\n"
+          },
+          "label": "Yes"
+        },
+        {
+          "id": "9e3945bcb094406095fe40a9a3c8d7ef",
+          "edgeType": "Edge",
+          "source": "f0e40515a74b42e08e0e8277772276e5",
+          "target": "f3daa040b21245559ea226884a3fb183",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "1c4da6f94c114612aa32fa00cb8727f3",
+          "edgeType": "Edge",
+          "source": "f436b62ea73c43e298d5db0dd64d1d82",
+          "target": "508871c0f79c4e779244fbe7f93df6a5",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "9d777af191b34b00aec89ad0adf8135e",
+          "edgeType": "Edge",
+          "source": "c42ee7f1e2a746188f5eb7432cc4da77",
+          "target": "a2c1e4a7397c440cbab14982878ed05a",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "83e0b25d24de46c799b9e0a090dc80a4",
+          "edgeType": "Edge",
+          "source": "3dcf0087f9524c668ba502348d2c57ee",
+          "target": "89411f478edb4e31aa468737a18ff866",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "ff1c58d35b4a4aa6b4c3d3a271a263df",
+          "edgeType": "Edge",
+          "source": "faa9170bf80b49848f329f75b14e57b0",
+          "target": "ff3507290b3541e3bfd1c4ba635910b6",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "fd77a15ec94e4e04b2f5facd26f74358",
+          "edgeType": "Edge",
+          "source": "ff3507290b3541e3bfd1c4ba635910b6",
+          "target": "dd95fe5fc93f406fb98f24b4003f92f0",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "5782a5f8bffa44d085bf7e56069525a0",
+          "edgeType": "Branch",
+          "source": "dd95fe5fc93f406fb98f24b4003f92f0",
+          "target": "f436b62ea73c43e298d5db0dd64d1d82",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "mode": "script",
+            "value": "(function execute() {\n    if (vaInputs.command!=\"exit\")\n        return true;\n    else\n        return false;\n})()\n"
+          },
+          "label": "CLI Enabled"
+        },
+        {
+          "id": "5a6672e795cd49a089a650103f08c1a0",
+          "edgeType": "Branch",
+          "source": "dd95fe5fc93f406fb98f24b4003f92f0",
+          "target": "89411f478edb4e31aa468737a18ff866",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "mode": "script",
+            "value": "(function execute() {\n   if (vaInputs.command==\"exit\"){\n       vaVars.cliEnabled=false;\n       return true;\n   }\n   else{\n       return false;\n   }\n    \n})()\n"
+          },
+          "label": "Exit"
+        },
+        {
+          "id": "0f4f891975b04478a36216a17a2cf511",
+          "edgeType": "Edge",
+          "source": "f3daa040b21245559ea226884a3fb183",
+          "target": "f436b62ea73c43e298d5db0dd64d1d82",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "a1ce94c00fd548de9ccc4b5c0625f573",
+          "edgeType": "Branch",
+          "source": "a2c1e4a7397c440cbab14982878ed05a",
+          "target": "9a3883af0b49495cac3404f440cbce93",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "mode": "script",
+            "value": "(function execute() {\n    if (vaVars.conversationSwitch==\"exit\"){\n        return true;\n    }\n    else{\n        return false\n    }\n})()\n"
+          },
+          "label": "Exit"
+        },
+        {
+          "id": "c6fd7732e1b5426988a8778ddd5825b8",
+          "edgeType": "Branch",
+          "source": "a2c1e4a7397c440cbab14982878ed05a",
+          "target": "faa9170bf80b49848f329f75b14e57b0",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "mode": "script",
+            "value": "(function execute() {\n     if (vaVars.conversationSwitch==\"cli\"){\n        return true;\n    }\n    else{\n        return false\n    }\n})()\n"
+          },
+          "label": "CLI"
+        },
+        {
+          "id": "14df22a9b25f44619dadb1f95cf028a1",
+          "edgeType": "Edge",
+          "source": "89411f478edb4e31aa468737a18ff866",
+          "target": "c42ee7f1e2a746188f5eb7432cc4da77",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "036c1bb8a5d647c0b629342432cf0db7",
+          "edgeType": "Branch",
+          "source": "a2c1e4a7397c440cbab14982878ed05a",
+          "target": "96db71639efb449b8b90d27055ab5998",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "mode": "script",
+            "value": "(function execute() {\n    if (vaVars.conversationSwitch!=\"cli\" &amp;&amp; vaVars.conversationSwitch!=\"exit\"  &amp;&amp; vaVars.conversationSwitch!=\"error\"){\n        return true;\n    }\n    else{\n        return false\n    }\n})()\n"
+          },
+          "label": "Command to Proccess"
+        },
+        {
+          "id": "41f8f5b2db12482e87f6601e63693e08",
+          "edgeType": "Branch",
+          "source": "96db71639efb449b8b90d27055ab5998",
+          "target": "f3daa040b21245559ea226884a3fb183",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "mode": "script",
+            "value": "(function execute() {\n    if (vaVars.additionalInfo==false){\n        return true\n    }\n    else{\n        var gr = new GlideRecord(vaVars.queryTable);\n        gr.addEncodedQuery(vaVars.queryQuery);\n        gr.setLimit(10);\n        gr.query();\n        if (gr.getRowCount()==0){\n            var cli = new cliForSIR();\n            vaVars.commandProcessorResult=cli.getMessage(112);\n            vaVars.command=\"_skip\";\n            return true;\n        }\n        else{\n            false;\n        }\n    }\n    \n    \n    //no\n  /*  if (vaVars.additionalInfo==true){\n       return false; \n    }\n    else{\n        return true;\n    }*/\n})()\n"
+          },
+          "label": "No"
+        },
+        {
+          "id": "5ddf3f6a68f74778b08ad6d8328573bf",
+          "edgeType": "Branch",
+          "source": "a2c1e4a7397c440cbab14982878ed05a",
+          "target": "37a52e56e7b64a1c9658e59412c294d9",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "mode": "script",
+            "value": "(function execute() {\n    if (vaVars.conversationSwitch==\"error\"){\n        return true;\n    }\n    else{\n        return false\n    }\n})()\n"
+          },
+          "label": "Error"
+        },
+        {
+          "id": "d64c047b23834760926117811746ca31",
+          "edgeType": "Edge",
+          "source": "37a52e56e7b64a1c9658e59412c294d9",
+          "target": "89411f478edb4e31aa468737a18ff866",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "13304aa942e049cf8321c3cbce60f054",
+          "edgeType": "Edge",
+          "source": "508871c0f79c4e779244fbe7f93df6a5",
+          "target": "3f112877d1a6476bae774e3a6e5fe6bb",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "85944e7075264b32bc7036e9f7f64ace",
+          "edgeType": "Branch",
+          "source": "3f112877d1a6476bae774e3a6e5fe6bb",
+          "target": "ff3507290b3541e3bfd1c4ba635910b6",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "mode": "script",
+            "value": "(function execute() {\n    if (vaVars.cliEnabled)\n        return true;\n    else\n        return false;\n})()\n"
+          },
+          "label": "CLI Enabled"
+        },
+        {
+          "id": "33e8393e4b75477b91f765176ceb4fc1",
+          "edgeType": "Branch",
+          "source": "3f112877d1a6476bae774e3a6e5fe6bb",
+          "target": "89411f478edb4e31aa468737a18ff866",
+          "sourcePort": "",
+          "targetPort": "",
+          "expression": {
+            "mode": "script",
+            "value": "(function execute() {\n    if (vaVars.cliEnabled)\n        return false;\n    else\n        return true;\n})()\n"
+          },
+          "label": "CLI is not Enabled"
+        }
+      ]
+    }
+  },
+  "variables": {
+    "f845c792bdd448f69a56c0259ab700c6": {
+      "id": "f845c792bdd448f69a56c0259ab700c6",
+      "name": "main_processor",
+      "label": "Main Processor",
+      "varType": "string",
+      "category": "vaInputs"
+    },
+    "724c919d30314a40a25514d52e89ed4b": {
+      "id": "724c919d30314a40a25514d52e89ed4b",
+      "name": "command",
+      "label": "Command",
+      "varType": "string",
+      "category": "vaInputs"
+    },
+    "9f670e28b212490293d9647a899fe6fc": {
+      "id": "9f670e28b212490293d9647a899fe6fc",
+      "value": {
+        "value": "",
+        "mode": "simple"
+      },
+      "name": "commandProcessorResult",
+      "label": "commandProcessorResult",
+      "varType": "script",
+      "category": "vaVars"
+    },
+    "6f137840c1ed47c9a36e31bbacc28ea1": {
+      "id": "6f137840c1ed47c9a36e31bbacc28ea1",
+      "value": {
+        "mode": "simple",
+        "value": "false"
+      },
+      "name": "cliEnabled",
+      "label": "cliEnabled",
+      "varType": "script",
+      "category": "vaVars"
+    },
+    "1f6d08f6f76d4365bf20aa69fa70ad91": {
+      "id": "1f6d08f6f76d4365bf20aa69fa70ad91",
+      "value": {
+        "mode": "simple",
+        "value": "null"
+      },
+      "name": "currentSIR",
+      "label": "currentSIR",
+      "varType": "script",
+      "category": "vaVars"
+    },
+    "713dc56ef02c41b3ab794f26d8b62dea": {
+      "id": "713dc56ef02c41b3ab794f26d8b62dea",
+      "value": {
+        "value": "",
+        "mode": "simple"
+      },
+      "name": "additionalInfoPrompt",
+      "label": "additionalInfoPrompt",
+      "varType": "script",
+      "category": "vaVars"
+    },
+    "8439e01fd9534e259395707026ba269b": {
+      "id": "8439e01fd9534e259395707026ba269b",
+      "value": {
+        "mode": "simple",
+        "value": "No record"
+      },
+      "name": "noRecordMessage",
+      "label": "noRecordMessage",
+      "varType": "script",
+      "category": "vaVars"
+    },
+    "e22bf03ed79a4ecdbd3a5cbfbc4737f4": {
+      "id": "e22bf03ed79a4ecdbd3a5cbfbc4737f4",
+      "value": {
+        "value": "",
+        "mode": "simple"
+      },
+      "name": "conversationSwitch",
+      "label": "conversationSwitch",
+      "varType": "script",
+      "category": "vaVars"
+    },
+    "e39887dffd59436cbc2d6af8be99ac9e": {
+      "id": "e39887dffd59436cbc2d6af8be99ac9e",
+      "value": {
+        "mode": "simple",
+        "value": "false"
+      },
+      "name": "additionalInfo",
+      "label": "additionalInfo",
+      "varType": "script",
+      "category": "vaVars"
+    },
+    "d1423e891e2c4fb7a48f7ad2d27f0048": {
+      "id": "d1423e891e2c4fb7a48f7ad2d27f0048",
+      "value": {
+        "value": "",
+        "mode": "simple"
+      },
+      "name": "command",
+      "label": "command",
+      "varType": "script",
+      "category": "vaVars"
+    },
+    "5f1ff882f664404ab3889a8edcb9945c": {
+      "id": "5f1ff882f664404ab3889a8edcb9945c",
+      "name": "additional_info",
+      "label": "Additional Info",
+      "varType": "reference",
+      "table": "",
+      "category": "vaInputs"
+    },
+    "50a7cc8cbae941db8a1240bc6de2b1c1": {
+      "id": "50a7cc8cbae941db8a1240bc6de2b1c1",
+      "value": {
+        "mode": "simple",
+        "value": ""
+      },
+      "name": "queryTable",
+      "label": "queryTable",
+      "varType": "script",
+      "category": "vaVars"
+    },
+    "42662ac04d6e44a0937645ffd0d9dd22": {
+      "id": "42662ac04d6e44a0937645ffd0d9dd22",
+      "value": {
+        "mode": "simple",
+        "value": ""
+      },
+      "name": "queryQuery",
+      "label": "queryQuery",
+      "varType": "script",
+      "category": "vaVars"
+    },
+    "de7300989eac4c48ba858915c1b8ca14": {
+      "id": "de7300989eac4c48ba858915c1b8ca14",
+      "value": {
+        "mode": "simple",
+        "value": ""
+      },
+      "name": "queryDisplay",
+      "label": "queryDisplay",
+      "varType": "script",
+      "category": "vaVars"
+    },
+    "b178d537829b46b7bac76e6d3b0d9db6": {
+      "id": "b178d537829b46b7bac76e6d3b0d9db6",
+      "value": {
+        "value": "",
+        "mode": "simple"
+      },
+      "name": "variableName",
+      "label": "variableName",
+      "varType": "script",
+      "category": "vaVars"
+    }
+  }
+}</graph>
+        <key_phrases/>
+        <live_agent>false</live_agent>
+        <name>Security</name>
+        <nlu_intent/>
+        <nlu_model/>
+        <nlu_provider>64c023c17300330021a044764df6a70e</nlu_provider>
+        <roles/>
+        <sys_class_name>sys_cb_topic</sys_class_name>
+        <sys_created_by>martin.meduna</sys_created_by>
+        <sys_created_on>2019-11-07 13:08:54</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>48f60f1cdb894090fd548ebe1596194f</sys_id>
+        <sys_mod_count>96</sys_mod_count>
+        <sys_name>Security</sys_name>
+        <sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope>
+        <sys_update_name>sys_cb_topic_48f60f1cdb894090fd548ebe1596194f</sys_update_name>
+        <sys_updated_by>martin.meduna</sys_updated_by>
+        <sys_updated_on>2019-11-14 23:28:19</sys_updated_on>
+        <variables/>
+    </sys_cb_topic>
+    <sys_variable_value action="delete_multiple" query="document_key=48f60f1cdb894090fd548ebe1596194f"/>
+</record_update>

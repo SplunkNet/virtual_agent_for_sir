@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_fix">
+    <sys_script_fix action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <before>false</before>
+        <description>active=true^assignment_group=dea26263ff0331007a6dffffffffff19</description>
+        <flush_cache>false</flush_cache>
+        <name>playground</name>
+        <record_for_rollback>false</record_for_rollback>
+        <run_once>false</run_once>
+        <script><![CDATA[var cli = new cliForSIR();
+//gs.info("Debug: "+cli.commandCaller("sir c -short_description 'Testing SIR' -description 'malware found'"));
+//var output=cli.commandCaller("sir u -short_description 'No Testing SIR' -description 'No malware found' -sys_id f0df6bd7dbbcc850fd548ebe1596194e");
+var output=cli.commandCaller("sir s -short_description 'No Testing SIR' -description 'No malware found' -sys_id 355a635cdbc267000f3154b4ce961912");
+//var output=cli.commandCaller("sir l -query active=true^assignment_group=dea26263ff0331007a6dffffffffff19");
+//gs.info("Debug: "+output);
+
+//var output=cli.commandCaller("observable l -sys_id 2924a576dbeb23000f3154b4ce9619eb");
+//tmpCommand="observable l -sys_id ${current_sir}";
+//gs.info("debug search: "+tmpCommand.search("${current_sir}"));
+//var output = cli.commandCaller("opensir");
+//var output=cli.languageProcessor("add observable huhlabubla");
+gs.info("Debug HTML: "+cli.dataHTMLFormater(output));
+gs.info("Debug: " + JSON.stringify(output));
+
+]]></script>
+        <sys_class_name>sys_script_fix</sys_class_name>
+        <sys_created_by>martin.meduna</sys_created_by>
+        <sys_created_on>2019-10-17 09:07:33</sys_created_on>
+        <sys_id>1c46cae5db684050fd548ebe159619d1</sys_id>
+        <sys_mod_count>30</sys_mod_count>
+        <sys_name>playground</sys_name>
+        <sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope>
+        <sys_update_name>sys_script_fix_1c46cae5db684050fd548ebe159619d1</sys_update_name>
+        <sys_updated_by>martin.meduna</sys_updated_by>
+        <sys_updated_on>2019-11-14 10:57:18</sys_updated_on>
+        <unloadable>false</unloadable>
+    </sys_script_fix>
+</record_update>

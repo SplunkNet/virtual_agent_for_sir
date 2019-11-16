@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update>
+    <sys_documentation element="prompt" label="Prompt" language="en" table="x_snc_vasir_language_processor">
+        <sys_documentation action="INSERT_OR_UPDATE">
+            <element>prompt</element>
+            <help/>
+            <hint/>
+            <label>Prompt</label>
+            <language>en</language>
+            <name>x_snc_vasir_language_processor</name>
+            <plural>Prompts</plural>
+            <sys_class_name>sys_documentation</sys_class_name>
+            <sys_created_by>martin.meduna</sys_created_by>
+            <sys_created_on>2019-11-13 15:26:28</sys_created_on>
+            <sys_id>61ffde1adbc54c90fd548ebe159619c1</sys_id>
+            <sys_mod_count>0</sys_mod_count>
+            <sys_name>Prompt</sys_name>
+            <sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package>
+            <sys_policy/>
+            <sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope>
+            <sys_update_name>sys_documentation_x_snc_vasir_language_processor_prompt_en</sys_update_name>
+            <sys_updated_by>martin.meduna</sys_updated_by>
+            <sys_updated_on>2019-11-13 15:26:28</sys_updated_on>
+            <url/>
+            <url_target/>
+        </sys_documentation>
+    </sys_documentation>
+</record_update>

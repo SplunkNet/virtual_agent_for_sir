@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action">
+    <sys_ui_policy_action action="DELETE">
+        <cleared>false</cleared>
+        <disabled>ignore</disabled>
+        <field>regex_group</field>
+        <mandatory>ignore</mandatory>
+        <sys_class_name>sys_ui_policy_action</sys_class_name>
+        <sys_created_by>martin.meduna</sys_created_by>
+        <sys_created_on>2019-11-13 10:25:06</sys_created_on>
+        <sys_id>e6ea555adb014c90fd548ebe159619cb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>regex_group</sys_name>
+        <sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope>
+        <sys_update_name>sys_ui_policy_action_e6ea555adb014c90fd548ebe159619cb</sys_update_name>
+        <sys_updated_by>martin.meduna</sys_updated_by>
+        <sys_updated_on>2019-11-13 10:25:06</sys_updated_on>
+        <table>x_snc_vasir_language_processor</table>
+        <ui_policy display_value="Show fields for Need more info">bdca515adb014c90fd548ebe159619d7</ui_policy>
+        <visible>true</visible>
+    </sys_ui_policy_action>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</application>
+        <file_path/>
+        <instance_id>07d25f30db66b6047d8cf22ebf961961</instance_id>
+        <instance_name>mmsc2</instance_name>
+        <name>sys_ui_policy_action_e6ea555adb014c90fd548ebe159619cb</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_policy_action"><sys_ui_policy_action action="INSERT_OR_UPDATE"><cleared>false</cleared><disabled>ignore</disabled><field>regex_group</field><mandatory>ignore</mandatory><sys_class_name>sys_ui_policy_action</sys_class_name><sys_created_by>martin.meduna</sys_created_by><sys_created_on>2019-11-13 10:25:06</sys_created_on><sys_id>e6ea555adb014c90fd548ebe159619cb</sys_id><sys_mod_count>0</sys_mod_count><sys_name>regex_group</sys_name><sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package><sys_policy/><sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope><sys_update_name>sys_ui_policy_action_e6ea555adb014c90fd548ebe159619cb</sys_update_name><sys_updated_by>martin.meduna</sys_updated_by><sys_updated_on>2019-11-13 10:25:06</sys_updated_on><table>x_snc_vasir_language_processor</table><ui_policy display_value="Show fields for Need more info">bdca515adb014c90fd548ebe159619d7</ui_policy><visible>true</visible></sys_ui_policy_action></record_update>]]></payload>
+        <payload_hash>1819130206</payload_hash>
+        <record_name>regex_group</record_name>
+        <reverted_from/>
+        <source>c7a40625db684050fd548ebe15961964</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>martin.meduna</sys_created_by>
+        <sys_created_on>2019-11-13 10:25:06</sys_created_on>
+        <sys_id>53fa555adb014c90fd548ebe1596197b</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16e644b99940000001</sys_recorded_at>
+        <sys_updated_by>martin.meduna</sys_updated_by>
+        <sys_updated_on>2019-11-13 10:25:06</sys_updated_on>
+        <type>UI Policy Action</type>
+        <update_guid>5bfa555a05014c902fbaebeb761eeb7a</update_guid>
+        <update_guid_history>5bfa555a05014c902fbaebeb761eeb7a:1819130206</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>martin.meduna</sys_created_by>
+        <sys_created_on>2019-11-14 09:06:46</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_policy_action">sys_ui_policy_action</sys_db_object>
+        <sys_id>0797b935efe44914a93a9f8b9bb66b44</sys_id>
+        <sys_metadata>e6ea555adb014c90fd548ebe159619cb</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>regex_group</sys_name>
+        <sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package>
+        <sys_parent display_value="Show fields for Need more info">bdca515adb014c90fd548ebe159619d7</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope>
+        <sys_scope_delete display_value="">362dbac608e94152a0f202487d5a17f1</sys_scope_delete>
+        <sys_update_name>sys_ui_policy_action_e6ea555adb014c90fd548ebe159619cb</sys_update_name>
+        <sys_update_version display_value="sys_ui_policy_action_e6ea555adb014c90fd548ebe159619cb">53fa555adb014c90fd548ebe1596197b</sys_update_version>
+        <sys_updated_by>martin.meduna</sys_updated_by>
+        <sys_updated_on>2019-11-14 09:06:46</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

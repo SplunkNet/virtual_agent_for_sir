@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl">
+    <sys_security_acl action="DELETE">
+        <active>true</active>
+        <admin_overrides>true</admin_overrides>
+        <advanced>false</advanced>
+        <condition/>
+        <description>Default access control on x_snc_vasir_variable</description>
+        <name>x_snc_vasir_variable</name>
+        <operation display_value="write">write</operation>
+        <script/>
+        <sys_class_name>sys_security_acl</sys_class_name>
+        <sys_created_by>martin.meduna</sys_created_by>
+        <sys_created_on>2019-11-13 10:04:41</sys_created_on>
+        <sys_id>0c565512db014c90fd548ebe159619c6</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_snc_vasir_variable</sys_name>
+        <sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope>
+        <sys_update_name>sys_security_acl_0c565512db014c90fd548ebe159619c6</sys_update_name>
+        <sys_updated_by>martin.meduna</sys_updated_by>
+        <sys_updated_on>2019-11-13 10:04:41</sys_updated_on>
+        <type display_value="record">record</type>
+    </sys_security_acl>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</application>
+        <file_path/>
+        <instance_id>07d25f30db66b6047d8cf22ebf961961</instance_id>
+        <instance_name>mmsc2</instance_name>
+        <name>sys_security_acl_0c565512db014c90fd548ebe159619c6</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_security_acl"><sys_security_acl action="INSERT_OR_UPDATE"><active>true</active><admin_overrides>true</admin_overrides><advanced>false</advanced><condition/><description>Default access control on x_snc_vasir_variable</description><name>x_snc_vasir_variable</name><operation display_value="write">write</operation><script/><sys_class_name>sys_security_acl</sys_class_name><sys_created_by>martin.meduna</sys_created_by><sys_created_on>2019-11-13 10:04:41</sys_created_on><sys_id>0c565512db014c90fd548ebe159619c6</sys_id><sys_mod_count>0</sys_mod_count><sys_name>x_snc_vasir_variable</sys_name><sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package><sys_policy/><sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope><sys_update_name>sys_security_acl_0c565512db014c90fd548ebe159619c6</sys_update_name><sys_updated_by>martin.meduna</sys_updated_by><sys_updated_on>2019-11-13 10:04:41</sys_updated_on><type display_value="record">record</type></sys_security_acl></record_update>]]></payload>
+        <payload_hash>1625050391</payload_hash>
+        <record_name>x_snc_vasir_variable</record_name>
+        <reverted_from/>
+        <source>c7a40625db684050fd548ebe15961964</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>martin.meduna</sys_created_by>
+        <sys_created_on>2019-11-13 10:04:41</sys_created_on>
+        <sys_id>cc565512db014c90fd548ebe159619ca</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16e6438e7fe0000001</sys_recorded_at>
+        <sys_updated_by>martin.meduna</sys_updated_by>
+        <sys_updated_on>2019-11-13 10:04:41</sys_updated_on>
+        <type>Access Control</type>
+        <update_guid>c456551261014c9028538b586f4cffca</update_guid>
+        <update_guid_history>c456551261014c9028538b586f4cffca:1625050391</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>martin.meduna</sys_created_by>
+        <sys_created_on>2019-11-13 10:19:26</sys_created_on>
+        <sys_db_object display_value="" name="sys_security_acl">sys_security_acl</sys_db_object>
+        <sys_id>7cf92ac02ffc47e2982fa0a11e4cef64</sys_id>
+        <sys_metadata>0c565512db014c90fd548ebe159619c6</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>x_snc_vasir_variable</sys_name>
+        <sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package>
+        <sys_parent display_value="">c8565512db014c90fd548ebe159619d8</sys_parent>
+        <sys_policy/>
+        <sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope>
+        <sys_scope_delete display_value="">362dbac608e94152a0f202487d5a17f1</sys_scope_delete>
+        <sys_update_name>sys_security_acl_0c565512db014c90fd548ebe159619c6</sys_update_name>
+        <sys_update_version display_value="sys_security_acl_0c565512db014c90fd548ebe159619c6">cc565512db014c90fd548ebe159619ca</sys_update_version>
+        <sys_updated_by>martin.meduna</sys_updated_by>
+        <sys_updated_on>2019-11-13 10:19:26</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

@@ -1,0 +1,424 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_script_include">
+    <sys_script_include action="INSERT_OR_UPDATE">
+        <access>package_private</access>
+        <active>true</active>
+        <api_name>x_snc_vasir.cliForSIR</api_name>
+        <caller_access/>
+        <client_callable>false</client_callable>
+        <description>command line syntax &lt;command&gt; &lt;action&gt; [-param1 -param2 -param3..]&#13;
+jSON format of parsed command &#13;
+{ &#13;
+"command":&lt;command&gt;,&#13;
+"action":&lt;action&gt;, &#13;
+&lt;param1_name&gt;:&lt;param1_value&gt;,&#13;
+&lt;param2_name&gt;:&lt;param2_value&gt;,&#13;
+...&#13;
+}&#13;
+&#13;
+jSON return&#13;
+{&#13;
+code:0=OK, (non 0 error)&#13;
+message_id:&lt;id_of the return message&gt;&#13;
+data:[{jSON_record1},{jSON_record2},....]&#13;
+}</description>
+        <name>cliForSIR</name>
+        <script><![CDATA[var cliForSIR = Class.create();
+cliForSIR.prototype = {
+    initialize: function() {},
+    parseCommand: function(command) {
+        var mwArr = command.match(/\'(.*?)\'/g);
+        for (var i in mwArr) {
+            command = command.replace(mwArr[i], "%" + i);
+        }
+        var cmdArr = command.split(' ');
+        var ret = {};
+        if (cmdArr.length == 1) {
+            ret.command = cmdArr[0];
+            return ret;
+        }
+        if (cmdArr.length == 2) {
+            ret.command = cmdArr[0];
+            ret.action = cmdArr[1];
+            return ret;
+        }
+        i = 0;
+        for (var j = 0; j < (cmdArr.length - 1); j++) {
+            if (j == 0) ret.command = cmdArr[j];
+            if (j == 1) ret.action = cmdArr[j];
+            if (j != 0 && j != 1) {
+                if ((j % 2) == 0) {
+                    if (cmdArr[j + 1].match(/%[0-9]+/g)) {
+                        ret[cmdArr[j].substr(1, cmdArr[j].length)] = mwArr[i].substr(1, mwArr[i].length - 2);
+                        i++;
+                    } else {
+                        ret[cmdArr[j].substr(1, cmdArr[j].length)] = cmdArr[j + 1];
+                    }
+                    j++;
+                }
+            }
+        }
+        return (ret);
+    },
+
+    commandCaller: function(cli_input) {
+
+        var command = this.parseCommand(cli_input);
+        var ret = {};
+        if (command.command == "opensir") {
+            return this.openSIR();
+        }
+        if (command.command == "help") {
+            return this.helpCommand(command);
+        }
+        if (command.command == "sir") {
+            if (command.action == "c") {
+                return this.sirCreate(command);
+            }
+            if (command.action == "u") {
+                return this.sirUpdate(command);
+            }
+            if (command.action == "l") {
+                return this.sirList(command);
+            }
+            if (command.action == "s") {
+                return this.sirShow(command);
+            }
+        }
+        if (command.command == "observable") {
+            if (command.action == "l") {
+                return this.observableList(command);
+            }
+            if (command.action == "a") {
+                return this.observableAdd(command);
+            }
+            if (command.action == "lookup") {
+                return this.observableLookUp(command);
+            }
+            if (command.action == "ss") {
+                return this.observableSighting(command);
+            }
+        }
+        if (command.command == "ci") {
+            if (command.action == "l") {
+                return this.ciList(command);
+            }
+            if (command.action == "a") {
+                return this.ciAdd(command);
+            }
+
+        }
+        if (command.command == "user") {
+            if (command.action == "l") {
+                return this.userList(command);
+            }
+            if (command.action == "a") {
+                return this.userAdd(command);
+            }
+        }
+        ret.code = 1;
+        ret.message_id = 109;
+        return ret;
+    },
+
+    sirCreate: function(command) {
+        var gr = new GlideRecord("sn_si_incident");
+        for (var j in command) {
+            if (j != "command" && j != "action") {
+                gr[j] = command[j] + "";
+            }
+        }
+        gr.insert();
+        var ret = {};
+        ret.code = 0;
+        ret.message_id = 1001;
+        return ret;
+    },
+
+    sirUpdate: function(command) {
+        var ret = {};
+        var gr = new GlideRecord("sn_si_incident");
+        if (command.hasOwnProperty("sys_id")) {
+            if (gr.get(command.sys_id)) {
+                for (var j in command) {
+                    if (j != "command" && j != "action" && j != "sys_id") {
+                        gr[j] = command[j] + "";
+                    }
+                }
+                if (gr.update() != null) {
+                    ret.code = 0;
+                    ret.message_id = 1003;
+                    return ret;
+                } else {//update failed
+                    ret.code = 1;
+                    ret.message_id = 1002;
+                    return ret;
+                }
+            } else {//no reocrd with sys_id
+                ret.code = 1;
+                ret.message_id = 1006;
+                return ret;
+            }
+        } else {//missing param sys_id
+            ret.code = 1;
+            ret.message_id = 1007;
+            return ret;
+        }
+
+
+        return ret;
+    },
+
+    sirList: function(command) {
+        var fields = ["number", "short_description", "category", "assigned_to", "state", "risk_score"];
+        var ret = {};
+        if (command.hasOwnProperty("query")) {
+            var gr = new GlideRecord("sn_si_incident");
+            gr.addEncodedQuery(command.query);
+            gr.setLimit(10);
+            gr.query();
+            ret.data = [];
+            while (gr.next()) {
+                var record = {};
+                for (var j in fields) {
+                    record[fields[j]] = gr.getDisplayValue(fields[j]);
+                }
+                ret.data.push(record);
+                delete record;
+            }
+            ret.code = 0;
+        } else {
+            ret.code = 1;
+            ret.message_id = 1004;
+            return ret;
+        }
+        return ret;
+    },
+
+    sirShow: function(command) {
+        var ret = {};
+        var fields = ["number", "short_description", "category", "assigned_to", "state", "risk_score"];
+        if (command.hasOwnProperty("sys_id")) {
+            var gr = new GlideRecord("sn_si_incident");
+            if (gr.get(command.sys_id)) {
+                ret.data = [];
+                var record = {};
+                for (var i in fields) {
+                    record[fields[i]] = gr.getDisplayValue(fields[i]);
+                }
+                ret.data.push(record);
+            } else {
+                ret.code = 1;
+                ret.message_id = 1006;
+                return ret;
+            }
+        } else {
+            ret.code = 1;
+            ret.message_id = 1005;
+            return ret;
+        }
+        ret.code = 0;
+        return ret;
+    },
+
+    observableList: function(command) {
+        var fields = ["value", "type", "finding"];
+        var ret = {};
+        if (command.hasOwnProperty("sys_id")) {
+            var gr = new GlideRecord("sn_ti_m2m_task_observable");
+            gr.addQuery("task", command.sys_id);
+            gr.query();
+            if (gr.getRowCount() > 0) {
+                ret.data = [];
+            }
+            while (gr.next()) {
+                var gr_obs = new GlideRecord("sn_ti_observable");
+                gr_obs.get(gr.observable.sys_id);
+                var record = {};
+                for (var j in fields) {
+                    record[fields[j]] = gr_obs.getDisplayValue(fields[j]);
+                }
+                ret.data.push(record);
+                delete gr_obs;
+                delete record;
+            }
+        } else {
+            ret.code = 1;
+            return ret;
+        }
+        ret.code = 0;
+        return ret;
+    },
+
+    observableAdd: function(command) {
+        if (command.hasOwnProperty("sys_id") && command.hasOwnProperty("value")) {
+            new sn_si.AddBulkObservablesToSI().addObservablesToSI(command.value, command.sys_id);
+        }
+        ret = {};
+        ret.code = 0;
+        ret.message_id = 2001;
+        return ret;
+    },
+
+    observableLookUp: function(command) {
+
+    },
+
+    getMessage: function(id) {
+        var gr = new GlideRecord("x_snc_vasir_return_messages");
+        gr.addQuery("id", id);
+        gr.query();
+        if (gr.next()) {
+            return gr.getDisplayValue("message");
+        } else {
+            return "No meesage.";
+        }
+    },
+
+    getHTMLMessage: function(id) {
+        var gr = new GlideRecord("x_snc_vasir_return_messages");
+        gr.addQuery("id", id);
+        gr.query();
+        if (gr.next()) {
+            return gr.getDisplayValue("html_message");
+        } else {
+            return "No meesage.";
+        }
+    },
+
+    languageProcessor: function(user_input) {
+        var gr = new GlideRecord("x_snc_vasir_language_processor");
+        gr.orderBy("order");
+        gr.query();
+        var ret = {};
+        while (gr.next()) {
+            if (gr.regex != "") {
+                var re = new RegExp(gr.regex + "", "mi");
+                var matchResults = user_input.match(re);
+                if (matchResults != null) {
+                    if (gr.getValue("need_more_info") == 0) {
+                        if (gr.variable_name != "") {
+                            var tmpString = gr.getDisplayValue("command");
+                            ret.command = tmpString.replace("${" + gr.variable_name + "}", "'" + matchResults[gr.regex_group] + "'");
+                            delete tmpString;
+                        } else {
+                            ret.command = gr.getDisplayValue("command");
+                        }
+                        ret.additionalInfo = false;
+                    } else {
+                        var tmpString = gr.getValue("encoded_query");
+                        ret.display = gr.getValue("display");
+                        ret.table_name = gr.getValue("table_name");
+                        ret.prompt = gr.getDisplayValue("prompt");
+                        ret.encoded_query = tmpString.replace("${" + gr.variable_name + "}", matchResults[gr.regex_group]);
+                        ret.variable_name = gr.getValue("variable_name");
+                        ret.additionalInfo = true;
+                        ret.command = gr.getDisplayValue("command");
+                        delete tmpString;
+                    }
+                    return ret;
+                }
+            } else { //never been tested ??
+                var keyWords = gr.getDisplayValue("keywords");
+                var keyWordArray = keyWords.split(",");
+                for (var i in keyWordArray) {
+                    if (user_input.toLowerCase().indexOf(keyWordArray[i])) {
+                        if (gr.getValue("need_more_info") == 0)
+                            ret.additionalInfo = false;
+                        else
+                            ret.additionalInfo = true;
+                        ret.command = gr.getDisplayValue("command");
+                        return ret;
+                    }
+                }
+            }
+        }
+        ret.command = "error";
+        //ret.need_more_info = false;
+        return ret;
+    },
+
+    dataHTMLFormater: function(outputResult) {
+        var data = outputResult.data;
+        if (data.length == 1) { //single record
+            ret = "<table>";
+            for (var key in data[0]) {
+                ret += "<tr><td>" + key.charAt(0).toUpperCase() + key.slice(1) + "</td><td>" + data[0][key] + "</td></tr>";
+            }
+            ret += "</table>";
+        } else {
+            ret = "<table>";
+            for (var i in data) {
+                if (i == 0) {
+                    ret += "<tr>";
+                    for (var key in data[i]) {
+                        ret += "<td>" + key.charAt(0).toUpperCase() + key.slice(1) + "</td>";
+                    }
+                    ret += "</tr>";
+                }
+                ret += "<tr>";
+                for (var key in data[i]) {
+                    if (data[i][key] == "Malicious") {
+                        ret += "<td style='color:red'>" + data[i][key] + "</td>";
+                    } else {
+                        ret += "<td>" + data[i][key] + "</td>";
+                    }
+                }
+                ret += "</tr>";
+            }
+            ret += "</table>";
+        }
+        return ret;
+    },
+
+    helpCommand: function(command) {
+        var ret = {};
+
+        if (command.hasOwnProperty("action")) {
+            if (command.action == "sir") {
+                ret.message_id = 3001;
+                return ret;
+            }
+            if (command.action == "observable") {
+                ret.message_id = 3002;
+                return ret;
+            }
+            if (command.action == "user") {
+                ret.message_id = 3003;
+                return ret;
+            }
+            if (command.action == "ci") {
+                ret.message_id = 3004;
+                return ret;
+            }
+            ret.code = 1;
+            ret.message_id = 110;
+        } else {
+            ret.code = 0;
+            ret.message_id = 102;
+        }
+        return ret;
+    },
+
+    openSIR: function() {
+        var ret = {};
+        ret.code = 0;
+        ret.message_id = 106;
+        return ret;
+    },
+
+    type: 'cliForSIR'
+};]]></script>
+        <sys_class_name>sys_script_include</sys_class_name>
+        <sys_created_by>martin.meduna</sys_created_by>
+        <sys_created_on>2019-10-17 09:06:57</sys_created_on>
+        <sys_id>6e06c6a5db684050fd548ebe15961992</sys_id>
+        <sys_mod_count>129</sys_mod_count>
+        <sys_name>cliForSIR</sys_name>
+        <sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package>
+        <sys_policy>read</sys_policy>
+        <sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope>
+        <sys_update_name>sys_script_include_6e06c6a5db684050fd548ebe15961992</sys_update_name>
+        <sys_updated_by>martin.meduna</sys_updated_by>
+        <sys_updated_on>2019-11-14 17:14:50</sys_updated_on>
+    </sys_script_include>
+</record_update>

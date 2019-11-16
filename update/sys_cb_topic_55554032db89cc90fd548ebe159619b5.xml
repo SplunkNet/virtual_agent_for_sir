@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_cb_topic">
+    <sys_cb_topic action="INSERT_OR_UPDATE">
+        <applicability/>
+        <category/>
+        <connect_queue/>
+        <description/>
+        <flexible_conversation_switching>false</flexible_conversation_switching>
+        <graph>{
+  "graph_api_version": "1.0.13",
+  "goals": {
+    "31063c54703b4f0ca8d41528efe020f6": {
+      "id": "31063c54703b4f0ca8d41528efe020f6",
+      "trigger": {
+        "type": "primary"
+      },
+      "name": "primary",
+      "applicability": "",
+      "description": "",
+      "nodes": {
+        "fdea062ef83640b58afbb509275ede5e": {
+          "id": "fdea062ef83640b58afbb509275ede5e",
+          "stepType": "Start",
+          "name": "Start",
+          "greetingResponse": {
+            "mode": "simple",
+            "value": ""
+          }
+        },
+        "8d9c038f47b64cecbf038415c8aa7688": {
+          "id": "8d9c038f47b64cecbf038415c8aa7688",
+          "stepType": "TerminateGoal",
+          "name": "End",
+          "confirmationMessage": {
+            "mode": "simple",
+            "value": ""
+          }
+        },
+        "1821bb151ca148678a1857f9234c8111": {
+          "stepType": "ChoicePrompt",
+          "name": "Incident category",
+          "prompt": {
+            "value": "Category?",
+            "mode": "simple"
+          },
+          "confirmMessage": {
+            "value": "",
+            "mode": "simple"
+          },
+          "acknowledgeMsg": {
+            "value": "",
+            "mode": "simple"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "optional": false,
+          "defaultValue": {
+            "value": "",
+            "mode": "simple"
+          },
+          "variableId": "6a6d917146a2439c85ef225f1a0985a3",
+          "id": "1821bb151ca148678a1857f9234c8111",
+          "withNluUserInput": false,
+          "skipIfFulfilled": false,
+          "entity": ""
+        },
+        "23e6871b211d4beeae3e1e6fbd2e4979": {
+          "id": "23e6871b211d4beeae3e1e6fbd2e4979",
+          "stepType": "Prompt",
+          "name": "details",
+          "prompt": {
+            "value": "Give me more details.",
+            "mode": "simple"
+          },
+          "confirmMessage": {
+            "value": "",
+            "mode": "simple"
+          },
+          "acknowledgeMsg": {
+            "value": "",
+            "mode": "simple"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "optional": false,
+          "defaultValue": {
+            "value": "",
+            "mode": "simple"
+          },
+          "withNluUserInput": false,
+          "skipIfFulfilled": false,
+          "entity": "",
+          "variableId": "e84b55579ea64c82afe3b79d838fd93c"
+        },
+        "ae95144296a3470eb0f97fdc2cd38e00": {
+          "id": "ae95144296a3470eb0f97fdc2cd38e00",
+          "stepType": "CrudAction",
+          "name": "Create SIR",
+          "template": "short_description=Incident create by VA^description={{vaInputs.details}}^category={{vaInputs.incident_category}}",
+          "mode": "create",
+          "record": "",
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "variableId": "591e3ae3edba4e7e8a474a2c1d7d2bdd"
+        },
+        "5c8e27df3b564141b4027af60fc8137d": {
+          "id": "5c8e27df3b564141b4027af60fc8137d",
+          "stepType": "RecordOutput",
+          "name": "SIR",
+          "variableId": "591e3ae3edba4e7e8a474a2c1d7d2bdd",
+          "mode": "variable",
+          "tableName": "sn_si_incident",
+          "fields": [
+            "number",
+            "request_category",
+            "short_description",
+            "assigned_to"
+          ],
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "condition": {
+            "mode": "",
+            "value": ""
+          }
+        },
+        "b58f48da03a14878af281122f28963e1": {
+          "stepType": "ReferenceChoicePrompt",
+          "name": "sirs",
+          "prompt": {
+            "value": "sirs",
+            "mode": "simple"
+          },
+          "confirmMessage": {
+            "value": "",
+            "mode": "simple"
+          },
+          "acknowledgeMsg": {
+            "value": "",
+            "mode": "simple"
+          },
+          "applicability": {
+            "value": "",
+            "mode": "query"
+          },
+          "optional": false,
+          "defaultValue": {
+            "value": "",
+            "mode": "simple"
+          },
+          "variableId": "2ce4d00bf1f54e33992fb6be754104a9",
+          "id": "b58f48da03a14878af281122f28963e1",
+          "mode": "glide_record",
+          "script": "",
+          "noRecordsResponseMsg": {
+            "value": "no records",
+            "mode": "simple"
+          },
+          "condition": {
+            "mode": "glide_query",
+            "value": "assigned_to=e03c3d0adb5ce300e971870968961925"
+          },
+          "withNluUserInput": false,
+          "skipIfFulfilled": false,
+          "entity": ""
+        }
+      },
+      "edges": [
+        {
+          "id": "b18accb053a3458da580086ad724f249",
+          "edgeType": "Edge",
+          "source": "fdea062ef83640b58afbb509275ede5e",
+          "target": "1821bb151ca148678a1857f9234c8111",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "425466712136420d9f0a1a377335a048",
+          "edgeType": "Edge",
+          "source": "23e6871b211d4beeae3e1e6fbd2e4979",
+          "target": "ae95144296a3470eb0f97fdc2cd38e00",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "a9062c3467aa410e8dc2d88608b21702",
+          "edgeType": "Edge",
+          "source": "ae95144296a3470eb0f97fdc2cd38e00",
+          "target": "5c8e27df3b564141b4027af60fc8137d",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "0dc4f3b9ee7a430789f3ec6e6f0c39d5",
+          "edgeType": "Edge",
+          "source": "5c8e27df3b564141b4027af60fc8137d",
+          "target": "8d9c038f47b64cecbf038415c8aa7688",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "219b9fae6cdc4b979e811d9c69e760b2",
+          "edgeType": "Edge",
+          "source": "1821bb151ca148678a1857f9234c8111",
+          "target": "b58f48da03a14878af281122f28963e1",
+          "sourcePort": "",
+          "targetPort": ""
+        },
+        {
+          "id": "2c9b83b4c4ff4b40ba169dcc97c3c501",
+          "edgeType": "Edge",
+          "source": "b58f48da03a14878af281122f28963e1",
+          "target": "23e6871b211d4beeae3e1e6fbd2e4979",
+          "sourcePort": "",
+          "targetPort": ""
+        }
+      ]
+    }
+  },
+  "variables": {
+    "6a6d917146a2439c85ef225f1a0985a3": {
+      "id": "6a6d917146a2439c85ef225f1a0985a3",
+      "name": "incident_category",
+      "label": "Incident Category",
+      "varType": "choice",
+      "choices": [
+        {
+          "label": "Malware",
+          "value": "Malicious code activity"
+        },
+        {
+          "label": "Phishing",
+          "value": "Phishing"
+        }
+      ],
+      "category": "vaInputs"
+    },
+    "e84b55579ea64c82afe3b79d838fd93c": {
+      "id": "e84b55579ea64c82afe3b79d838fd93c",
+      "name": "details",
+      "label": "Details",
+      "varType": "string",
+      "category": "vaInputs"
+    },
+    "591e3ae3edba4e7e8a474a2c1d7d2bdd": {
+      "id": "591e3ae3edba4e7e8a474a2c1d7d2bdd",
+      "name": "create_sir",
+      "label": "Create SIR",
+      "varType": "reference",
+      "table": "sn_si_incident",
+      "inactive": false,
+      "category": "vaInputs"
+    },
+    "2ce4d00bf1f54e33992fb6be754104a9": {
+      "id": "2ce4d00bf1f54e33992fb6be754104a9",
+      "name": "sirs",
+      "label": "Sirs",
+      "varType": "reference",
+      "table": "sn_si_incident",
+      "category": "vaInputs"
+    }
+  }
+}</graph>
+        <key_phrases/>
+        <live_agent>false</live_agent>
+        <name>Demo Topic</name>
+        <nlu_intent/>
+        <nlu_model/>
+        <nlu_provider>64c023c17300330021a044764df6a70e</nlu_provider>
+        <roles/>
+        <sys_class_name>sys_cb_topic</sys_class_name>
+        <sys_created_by>martin.meduna</sys_created_by>
+        <sys_created_on>2019-11-14 17:27:50</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_id>55554032db89cc90fd548ebe159619b5</sys_id>
+        <sys_mod_count>39</sys_mod_count>
+        <sys_name>Demo Topic</sys_name>
+        <sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope>
+        <sys_update_name>sys_cb_topic_55554032db89cc90fd548ebe159619b5</sys_update_name>
+        <sys_updated_by>martin.meduna</sys_updated_by>
+        <sys_updated_on>2019-11-15 17:46:27</sys_updated_on>
+        <variables/>
+    </sys_cb_topic>
+    <sys_variable_value action="delete_multiple" query="document_key=55554032db89cc90fd548ebe159619b5"/>
+</record_update>
