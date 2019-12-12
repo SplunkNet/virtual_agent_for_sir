@@ -11,6 +11,10 @@
   vr=" $";
   vr;
 </g:evaluate>
+<g:evaluate var="jvar_vrns">
+  vrns="$";
+  vrns;
+</g:evaluate>
 <style>
 	BODY{
 		font-family: Gilroy-Regular,Arial,Helvetica,sans-serif;
@@ -112,7 +116,7 @@
 	<h4>CLI - Command Line Interface</h4>
 	<p>Command line interface creates universal approach how to run commands in Security Incident. CLI can be easyly extended for new features.</p>
 	<p><img src="cli_flow.png" width="550" /></p>
-	<p>The command syntax is  ${AMP}lt;command${AMP}gt; ${AMP}lt;action${AMP}gt; -parameter_1 -parameter_2 ... -parameter_x </p>
+	<p>The command syntax is  ${AMP}lt;command${AMP}gt; ${AMP}lt;action${AMP}gt; -param1_name param1_value -param2_name param2_value ... -paramx_name:paramx_value </p>
 	<p>Example</p>
 	<p>Create security incident with Short Description 'Incident created via Virtual Agent' and assign it to the user with sys_id d7211df8db010490fd548ebe15961958.</p>
 		<pre>
@@ -179,7 +183,7 @@
 		</tr>
 		<tr>
 			<td style="word-break: break-word">Regular Expression</td>
-			<td style="word-break: break-word">Regular Expression. Example: (^create incident |^create sir) (.+)</td>
+			<td style="word-break: break-word">Regular Expression. Example: <pre>(^create incident |^create sir) (.+)</pre></td>
 			
 		</tr>
 		<tr>
@@ -188,7 +192,7 @@
 		</tr>	
 		<tr>
 			<td style="word-break: break-word">Variable name</td>
-			<td style="word-break: break-word">You can define variable. The variable is used in (CLI) Command field in format  <g:no_escape>${HTML:jvar_vr}</g:no_escape>{variable_name}. Example: user_description</td>
+			<td style="word-break: break-word">You can define variable. The variable is used in (CLI) Command field in format  <g:no_escape>${HTML:jvar_vr}</g:no_escape>{variable_name}. Example: <pre>user_description</pre></td>
 			
 		</tr>
 		<tr>
@@ -198,7 +202,7 @@
 		</tr>
 		<tr>
 			<td style="word-break: break-word">Command</td>
-			<td style="word-break: break-word">CLI command. Example: sir c -short_description <g:no_escape>${HTML:jvar_vr}</g:no_escape>{user_description}</td>
+			<td style="word-break: break-word">CLI command. Example:<pre>sir c -short_description <g:no_escape>${HTML:jvar_vr}</g:no_escape>{user_description}</pre></td>
 			
 		</tr>	
 		</tbody>
@@ -228,7 +232,7 @@
 		</tr>
 		<tr>
 			<td style="word-break: break-word">Regular Expression</td>
-			<td style="word-break: break-word">Regular Expression. Example: ^assign to (.+)</td>
+			<td style="word-break: break-word">Regular Expression. Example: <pre>^assign to (.+)</pre></td>
 		</tr>
 		<tr>
 			<td style="word-break: break-word">Regex Group</td>
@@ -241,23 +245,23 @@
 		</tr>
 		<tr>
 			<td style="word-break: break-word">Variable name</td>
-			<td style="word-break: break-word">You can define variable. The variable is used in (CLI) Command field in format <g:no_escape>${HTML:jvar_vr}</g:no_escape>{variable_name}. Example: assigned_user</td>	
+			<td style="word-break: break-word">You can define variable. The variable is used in (CLI) Command field in format <g:no_escape>${HTML:jvar_vr}</g:no_escape>{variable_name}. Example: <pre>assigned_user</pre></td>	
 		</tr>
 		<tr>
 			<td style="word-break: break-word">Table Name</td>
-			<td style="word-break: break-word">Teble which will be queired based on user inout to get addtional info. Example: sys_user</td>
+			<td style="word-break: break-word">Teble which will be queried based on user input to get addtional info. Example: <pre>sys_user</pre></td>
 		</tr>
 		<tr>
 			<td style="word-break: break-word">Display</td>
-			<td style="word-break: break-word">List of name of columns what will be dsiplay to user to make a choice: Example: name</td>
+			<td style="word-break: break-word">List of name of columns what will be display to user to make a choice: Example: <pre>name</pre></td>
 		</tr>
 		<tr>
 			<td style="word-break: break-word">Encoded Query</td>
-			<td style="word-break: break-word">Encoded Query which is used to query the table for offer user choices. Query should contains variable of user input. Example: nameLIKE<g:no_escape>${HTML:jvar_vr}</g:no_escape>{assigned_user} </td>
+			<td style="word-break: break-word">Encoded Query which is used to query the table for offer user choices. Query should contains variable of user input. Example: <pre>nameLIKE<g:no_escape>${HTML:jvar_vrns}</g:no_escape>{assigned_user}</pre></td>
 		</tr>	
 		<tr>
 			<td style="word-break: break-word">Command</td>
-			<td style="word-break: break-word">CLI command. Example: sir u -assigned_to <g:no_escape>${HTML:jvar_vr}</g:no_escape>[assigned_user] -sys_id <g:no_escape>${HTML:jvar_vr}</g:no_escape>{current_sir}. Important note: The variable needs to be in [ ]. This tell the agent to use users picked input not the original input.</td>
+			<td style="word-break: break-word">CLI command. Example:<pre>sir u -assigned_to <g:no_escape>${HTML:jvar_vr}</g:no_escape>[assigned_user] -sys_id <g:no_escape>${HTML:jvar_vr}</g:no_escape>{current_sir}</pre> Important note: The variable needs to be in [ ]. This tell the agent to use users picked input not the original input.</td>
 			
 		</tr>	
 		</tbody>
@@ -279,7 +283,7 @@
 		</tr>
 		<tr>
 			<td style="word-break: break-word"><g:no_escape>${HTML:jvar_vr}</g:no_escape>{current_incident}</td>
-			<td style="word-break: break-word">Variable contains sys_id of open incident. If no incident is opened system atumaticaly returns error message. </td>
+			<td style="word-break: break-word">Variable contains sys_id of open incident. If no incident is opened system automaticaly returns error message. </td>
 		</tr>
 		</tbody>
 	</table>
@@ -320,13 +324,13 @@
         <sys_created_by>martin.meduna</sys_created_by>
         <sys_created_on>2019-12-12 10:11:17</sys_created_on>
         <sys_id>810de2efdba18494fd548ebe1596193b</sys_id>
-        <sys_mod_count>63</sys_mod_count>
+        <sys_mod_count>69</sys_mod_count>
         <sys_name>documentation</sys_name>
         <sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package>
         <sys_policy/>
         <sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope>
         <sys_update_name>sys_ui_page_810de2efdba18494fd548ebe1596193b</sys_update_name>
         <sys_updated_by>martin.meduna</sys_updated_by>
-        <sys_updated_on>2019-12-12 14:22:43</sys_updated_on>
+        <sys_updated_on>2019-12-12 15:30:20</sys_updated_on>
     </sys_ui_page>
 </record_update>
