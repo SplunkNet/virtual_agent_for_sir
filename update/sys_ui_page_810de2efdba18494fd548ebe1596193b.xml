@@ -94,7 +94,7 @@
 </div>
 <div class="container">
 	<h4>Language processor</h4>
-	<p>Language processor examine user input and make decision whenever additional information is needed. It prepare the query to appropriete table. Langauge processor is configured outside the Virtual Agent Desiger. How to configure the Language processor see bellow. </p>
+	<p>Language processor examine user input and make decision whenever additional information is needed. It prepares the query to an appropriete table. Langauge processor is configured outside the Virtual Agent Desiger. How to configure the Language processor see bellow. </p>
 </div>
 <div class="container">
 	<h4>User Input (additional info)</h4>
@@ -245,7 +245,7 @@
 		</tr>
 		<tr>
 			<td style="word-break: break-word">Variable name</td>
-			<td style="word-break: break-word">You can define variable. The variable is used in (CLI) Command field in format <g:no_escape>${HTML:jvar_vr}</g:no_escape>{variable_name}. Example: <pre>assigned_user</pre></td>	
+			<td style="word-break: break-word">You can define variable. The variable is used in (CLI) Command field or Encoded query field in format <g:no_escape>${HTML:jvar_vr}</g:no_escape>{variable_name}. Example: <pre>assigned_user</pre></td>	
 		</tr>
 		<tr>
 			<td style="word-break: break-word">Table Name</td>
@@ -253,7 +253,7 @@
 		</tr>
 		<tr>
 			<td style="word-break: break-word">Display</td>
-			<td style="word-break: break-word">List of name of columns what will be display to user to make a choice: Example: <pre>name</pre></td>
+			<td style="word-break: break-word">List of name of columns what will be display to user to make a choice. Example: <pre>name</pre></td>
 		</tr>
 		<tr>
 			<td style="word-break: break-word">Encoded Query</td>
@@ -324,13 +324,13 @@
         <sys_created_by>martin.meduna</sys_created_by>
         <sys_created_on>2019-12-12 10:11:17</sys_created_on>
         <sys_id>810de2efdba18494fd548ebe1596193b</sys_id>
-        <sys_mod_count>69</sys_mod_count>
+        <sys_mod_count>72</sys_mod_count>
         <sys_name>documentation</sys_name>
         <sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package>
         <sys_policy/>
         <sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope>
         <sys_update_name>sys_ui_page_810de2efdba18494fd548ebe1596193b</sys_update_name>
         <sys_updated_by>martin.meduna</sys_updated_by>
-        <sys_updated_on>2019-12-12 15:30:20</sys_updated_on>
+        <sys_updated_on>2019-12-12 19:13:20</sys_updated_on>
     </sys_ui_page>
 </record_update>
