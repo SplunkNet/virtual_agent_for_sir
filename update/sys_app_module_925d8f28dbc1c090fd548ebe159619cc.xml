@@ -14,7 +14,7 @@
         <mobile_title>Language Processors</mobile_title>
         <mobile_view_name>Mobile</mobile_view_name>
         <name>x_snc_vasir_language_processor</name>
-        <order/>
+        <order>100</order>
         <override_menu_roles>false</override_menu_roles>
         <query/>
         <report/>
@@ -27,7 +27,7 @@
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
         <sys_id>925d8f28dbc1c090fd548ebe159619cc</sys_id>
-        <sys_mod_count>0</sys_mod_count>
+        <sys_mod_count>1</sys_mod_count>
         <sys_name>Language Processors</sys_name>
         <sys_overrides/>
         <sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package>
@@ -35,7 +35,7 @@
         <sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope>
         <sys_update_name>sys_app_module_925d8f28dbc1c090fd548ebe159619cc</sys_update_name>
         <sys_updated_by>martin.meduna</sys_updated_by>
-        <sys_updated_on>2019-11-08 08:15:23</sys_updated_on>
+        <sys_updated_on>2019-12-12 13:47:33</sys_updated_on>
         <timeline_page/>
         <title>Language Processors</title>
         <uncancelable>false</uncancelable>

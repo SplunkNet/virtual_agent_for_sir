@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ui_page">
+    <sys_ui_page action="INSERT_OR_UPDATE">
+        <category>general</category>
+        <client_script/>
+        <description/>
+        <direct>false</direct>
+        <endpoint>x_snc_vasir_documentation.do</endpoint>
+        <html><![CDATA[<?xml version="1.0" encoding="utf-8" ?>
+<j2:jelly trim="false" xmlns:j="jelly:core" xmlns:g="glide" xmlns:j2="null" xmlns:g2="null">
+<g:evaluate var="jvar_vr">
+  vr=" $";
+  vr;
+</g:evaluate>
+<style>
+	BODY{
+		font-family: Gilroy-Regular,Arial,Helvetica,sans-serif;
+		font-size: 16px;
+		color: #333;
+	}
+	H2{
+		color: #307C8F;
+		font-size: 32px
+	}
+	H4{
+		font-size: 24px;
+		overflow-wrap: break-word;
+		font-family: inherit;
+		font-weight: 500;
+		line-height: 1.1;
+		color: inherit;
+	}
+	P{
+		color: #333;
+		background-color: #fff;
+		font-family: Gilroy-Regular,Arial,Helvetica,sans-serif;
+		font-size: 16px;
+		line-height: 1.42857;
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
+	DIV.container{
+		margin:20px;
+	}
+	TABLE.details{
+		width: 100%;
+		max-width: 100%;
+		margin-bottom: 20px;
+	}
+	TH{
+		font-size: 15px;
+		font-weight: 700;
+		color: #fff;
+		text-align: left;
+		border-left: none;
+		border-right: none;
+		display: table-cell;
+		background-color: #2d3d3f;
+		vertical-align: bottom;
+		padding: 10px;
+	}
+	TD{
+		padding: 10px;
+		line-height: inherit;
+		vertical-align: top;
+		border-top: 1px solid #ddd;
+		display: table-cell;
+		font-family: monospace;
+		font-size: 15px;
+		color: #666;
+		background-color: #fff;
+		
+	
+	}
+	
+</style>
+<div class="container">
+	<h2 style="">Virtual Agent for SIR</h2>
+	<p>
+		Virtual Agent for SIR is an application for ServiceNow Virtual Agent. It allows to view, create and update Security incidents via chatbot functionality 
+	</p>
+</div>
+<div class="container">
+	<h4>High Level Concept</h4>
+	<p>Image describes how the chatbot is designed.</p>
+	<p> <img src="chat_flow.png" width="500"/></p>
+</div>
+<div class="container">
+	<h4>User Input</h4>
+	<p>Collecting user input</p>
+</div>
+<div class="container">
+	<h4>Language processor</h4>
+	<p>Language processor examine user input and make decision whenever additional information is needed. It prepare the query to appropriete table. Langauge processor is configured outside the Virtual Agent Desiger. How to configure the Language processor see bellow. </p>
+</div>
+<div class="container">
+	<h4>User Input (additional info)</h4>
+	<p>User is queried to choose an option to complete their initial request. It si perfomred as a query to the table e.g. sys_user</p>
+</div>
+<div class="container">
+	<h4>Command pre-processor</h4>
+	<p>Command pre-processor prepare the final CLI commmand. It replaces variables with actual values. </p>
+	</div>
+<div class="container">
+	<h4>Command processor</h4>
+	<p>Command processor perform the action through CLI API. For detailed information about CLI see bellow</p>
+</div>
+<div class="container">
+	<h4>Command response</h4>
+	<p>Command response creates chatbot response. It can be just confirmation or error of processed action. Or it can be formated response e.g. Security Incident details.</p>
+</div>
+<div class="container">
+	<h4>CLI - Command Line Interface</h4>
+	<p>Command line interface creates universal approach how to run commands in Security Incident. CLI can be easyly extended for new features.</p>
+	<p><img src="cli_flow.png" width="550" /></p>
+	<p>The command syntax is  ${AMP}lt;command${AMP}gt; ${AMP}lt;action${AMP}gt; -parameter_1 -parameter_2 ... -parameter_x </p>
+	<p>Example</p>
+	<p>Create security incident with Short Description 'Incident created via Virtual Agent' and assign it to the user with sys_id d7211df8db010490fd548ebe15961958.</p>
+		<pre>
+			sir c -short_description 'Incident created via Virtual Agent' -assgined_to d7211df8db010490fd548ebe15961958
+	</pre>
+	<p>Note: multi-words parameters must be closed in ' '. Standard quation marks are not supported!</p>
+</div>
+<div class="container">
+	<h4>Implementing new command/action for CLI</h4>
+	<p><ol>
+		<li>Update commandCaller method. Add new decision making conditiions.</li>
+		<li>Implement new method with jSON paramter "command" and with jSON return </li>
+		<li>Be sure that you check for mandatory parameters for your method. </li>
+		<li>Configure all new messages in Messages table (see bellow)</li>
+	</ol></p>
+	<p>Input jSON format</p>
+	<pre>{ 
+	"command":command,
+	"action":action, 
+	param1_name:param1_value,
+	param2_name:param2_value,
+	...
+	paramx_name:paramx_value,
+}</pre>
+	<p>Output jSON format</p>
+	<pre>{ 
+	code:0=OK, (non 0 error)
+	message_id:id_of the return message
+	data:[
+	{jSON_record1},
+	{jSON_record2},
+	...
+	{jSON_recordx}
+	]
+}</pre>
+	
+</div>
+	
+<div class="container">
+	<h4>Language processor Configuration</h4>
+	<p>Language processor is used to transform user input into CLI command. There are two possible scenarious.
+		<ol>
+		<li>Command does not require addtion input from user</li>
+		<li>Command requires addtion input from user</li>
+	</ol>
+	</p>
+	<h4>Command does not require addtion input from user</h4>
+	<p>
+	<table class="details">
+		<thead>
+			<tr>
+				<th width="18%">Field</th>
+				<th width="82%">Description</th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td style="word-break: break-word">Name</td>
+			<td style="word-break: break-word">Name of the rule</td>
+		</tr>
+		<tr>
+			<td style="word-break: break-word">Order</td>
+			<td style="word-break: break-word">Order</td>
+		</tr>
+		<tr>
+			<td style="word-break: break-word">Regular Expression</td>
+			<td style="word-break: break-word">Regular Expression. Example: (^create incident |^create sir) (.+)</td>
+			
+		</tr>
+		<tr>
+			<td style="word-break: break-word">Keywords</td>
+			<td style="word-break: break-word">Comma separated keywords. Note: using keywords is just for the simplest commands only. Keywords does not support variables</td>
+		</tr>	
+		<tr>
+			<td style="word-break: break-word">Variable name</td>
+			<td style="word-break: break-word">You can define variable. The variable is used in (CLI) Command field in format  <g:no_escape>${HTML:jvar_vr}</g:no_escape>{variable_name}. Example: user_description</td>
+			
+		</tr>
+		<tr>
+			<td style="word-break: break-word">Regex Group</td>
+			<td style="word-break: break-word">Regex Group which will be used to populate the variable</td>
+			
+		</tr>
+		<tr>
+			<td style="word-break: break-word">Command</td>
+			<td style="word-break: break-word">CLI command. Example: sir c -short_description <g:no_escape>${HTML:jvar_vr}</g:no_escape>{user_description}</td>
+			
+		</tr>	
+		</tbody>
+	</table>
+	</p>
+	<h4>Command requires addtion input from user</h4>
+	<p>
+	<table class="details">
+		<thead>
+			<tr>
+				<th width="18%">Field</th>
+				<th width="82%">Description</th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td style="word-break: break-word">Name</td>
+			<td style="word-break: break-word">Name of the rule</td>
+		</tr>
+		<tr>
+			<td style="word-break: break-word">Order</td>
+			<td style="word-break: break-word">Order</td>
+		</tr>
+		<tr>
+			<td style="word-break: break-word">Need More Info</td>
+			<td style="word-break: break-word">If there is additional user inout required</td>
+		</tr>
+		<tr>
+			<td style="word-break: break-word">Regular Expression</td>
+			<td style="word-break: break-word">Regular Expression. Example: ^assign to (.+)</td>
+		</tr>
+		<tr>
+			<td style="word-break: break-word">Regex Group</td>
+			<td style="word-break: break-word">Regex Group which will be used to populate the variable</td>
+			
+		</tr>
+		<tr>
+			<td style="word-break: break-word">Prompt</td>
+			<td style="word-break: break-word">Question for a user when asking more info.</td>
+		</tr>
+		<tr>
+			<td style="word-break: break-word">Variable name</td>
+			<td style="word-break: break-word">You can define variable. The variable is used in (CLI) Command field in format <g:no_escape>${HTML:jvar_vr}</g:no_escape>{variable_name}. Example: assigned_user</td>	
+		</tr>
+		<tr>
+			<td style="word-break: break-word">Table Name</td>
+			<td style="word-break: break-word">Teble which will be queired based on user inout to get addtional info. Example: sys_user</td>
+		</tr>
+		<tr>
+			<td style="word-break: break-word">Display</td>
+			<td style="word-break: break-word">List of name of columns what will be dsiplay to user to make a choice: Example: name</td>
+		</tr>
+		<tr>
+			<td style="word-break: break-word">Encoded Query</td>
+			<td style="word-break: break-word">Encoded Query which is used to query the table for offer user choices. Query should contains variable of user input. Example: nameLIKE<g:no_escape>${HTML:jvar_vr}</g:no_escape>{assigned_user} </td>
+		</tr>	
+		<tr>
+			<td style="word-break: break-word">Command</td>
+			<td style="word-break: break-word">CLI command. Example: sir u -assigned_to <g:no_escape>${HTML:jvar_vr}</g:no_escape>[assigned_user] -sys_id <g:no_escape>${HTML:jvar_vr}</g:no_escape>{current_sir}. Important note: The variable needs to be in [ ]. This tell the agent to use users picked input not the original input.</td>
+			
+		</tr>	
+		</tbody>
+	</table>
+	</p>
+	<h4>System variables</h4>
+	<p>
+	<table class="details">
+		<thead>
+			<tr>
+				<th width="18%">Varaible</th>
+				<th width="82%">Description</th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td style="word-break: break-word"><g:no_escape>${HTML:jvar_vr}</g:no_escape>{current_user}</td>
+			<td style="word-break: break-word">Variable contains sys_ide of logged user</td>
+		</tr>
+		<tr>
+			<td style="word-break: break-word"><g:no_escape>${HTML:jvar_vr}</g:no_escape>{current_incident}</td>
+			<td style="word-break: break-word">Variable contains sys_id of open incident. If no incident is opened system atumaticaly returns error message. </td>
+		</tr>
+		</tbody>
+	</table>
+	</p>
+	
+</div>
+<div class="container">
+	<h4>Messages configruation</h4>
+	<p>It is possible to configure all messages outside the Virtual Agend designer. Each message is associeted with ID. ID is used in the designer or as a part of return jSON or CLI command.</p>
+	<table class="details">
+		<thead>
+			<tr>
+				<th width="18%">Field</th>
+				<th width="82%">Description</th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr>
+			<td style="word-break: break-word">ID</td>
+			<td style="word-break: break-word">Numeric ID of the message</td>
+		</tr>
+		<tr>
+			<td style="word-break: break-word">Message</td>
+			<td style="word-break: break-word">Message. Example: Sorry man, I do not get what you mean...</td>
+		</tr>
+		<tr>
+			<td style="word-break: break-word">Method</td>
+			<td style="word-break: break-word">Method where the message is used. Note: This is an optional field just maitain the information where the message is used.</td>
+		</tr>
+		</tbody>
+	</table>
+</div>	
+	
+</j2:jelly>]]></html>
+        <name>documentation</name>
+        <processing_script/>
+        <sys_class_name>sys_ui_page</sys_class_name>
+        <sys_created_by>martin.meduna</sys_created_by>
+        <sys_created_on>2019-12-12 10:11:17</sys_created_on>
+        <sys_id>810de2efdba18494fd548ebe1596193b</sys_id>
+        <sys_mod_count>63</sys_mod_count>
+        <sys_name>documentation</sys_name>
+        <sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope>
+        <sys_update_name>sys_ui_page_810de2efdba18494fd548ebe1596193b</sys_update_name>
+        <sys_updated_by>martin.meduna</sys_updated_by>
+        <sys_updated_on>2019-12-12 14:22:43</sys_updated_on>
+    </sys_ui_page>
+</record_update>

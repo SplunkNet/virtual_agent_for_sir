@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_module">
+    <sys_ui_module action="DELETE">
+        <active>true</active>
+        <application display_value="Virtual Agent for SIR">b0bbd860dbc18090fd548ebe15961903</application>
+        <filter/>
+        <name>Language Processors</name>
+        <order>100</order>
+        <path/>
+        <path_relative_to_root>false</path_relative_to_root>
+        <roles>sn_si.admin</roles>
+        <sys_class_name>sys_ui_module</sys_class_name>
+        <sys_created_by>martin.meduna</sys_created_by>
+        <sys_created_on>2019-11-08 08:15:23</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>125d8f28dbc1c090fd548ebe159619d0</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>Language Processors</sys_name>
+        <sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope>
+        <sys_update_name>sys_ui_module_125d8f28dbc1c090fd548ebe159619d0</sys_update_name>
+        <sys_updated_by>martin.meduna</sys_updated_by>
+        <sys_updated_on>2019-12-12 13:46:31</sys_updated_on>
+        <table>x_snc_vasir_language_processor</table>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+    </sys_ui_module>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</application>
+        <file_path/>
+        <instance_id>07d25f30db66b6047d8cf22ebf961961</instance_id>
+        <instance_name>mmsc2</instance_name>
+        <name>sys_ui_module_125d8f28dbc1c090fd548ebe159619d0</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_module"><sys_ui_module action="INSERT_OR_UPDATE"><active>true</active><application display_value="Virtual Agent for SIR">b0bbd860dbc18090fd548ebe15961903</application><filter/><name>Language Processors</name><order>100</order><path/><path_relative_to_root>false</path_relative_to_root><roles>sn_si.admin</roles><sys_class_name>sys_ui_module</sys_class_name><sys_created_by>martin.meduna</sys_created_by><sys_created_on>2019-11-08 08:15:23</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>125d8f28dbc1c090fd548ebe159619d0</sys_id><sys_mod_count>1</sys_mod_count><sys_name>Language Processors</sys_name><sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package><sys_policy/><sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope><sys_update_name>sys_ui_module_125d8f28dbc1c090fd548ebe159619d0</sys_update_name><sys_updated_by>martin.meduna</sys_updated_by><sys_updated_on>2019-12-12 13:46:31</sys_updated_on><table>x_snc_vasir_language_processor</table><uncancelable>false</uncancelable><view_name/></sys_ui_module></record_update>]]></payload>
+        <payload_hash>-450515560</payload_hash>
+        <record_name>Language Processors</record_name>
+        <reverted_from/>
+        <source>c7a40625db684050fd548ebe15961964</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>martin.meduna</sys_created_by>
+        <sys_created_on>2019-12-12 13:46:31</sys_created_on>
+        <sys_id>103f93a7db298494fd548ebe159619cb</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16efa5c6d2c0000001</sys_recorded_at>
+        <sys_updated_by>martin.meduna</sys_updated_by>
+        <sys_updated_on>2019-12-12 13:46:31</sys_updated_on>
+        <type>Module</type>
+        <update_guid>183f93a7b5298494f79d6729ab65efca</update_guid>
+        <update_guid_history>183f93a7b5298494f79d6729ab65efca:-450515560,925d8f28e5c1c0908895d09a52b8c6d2:-1508404257</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>martin.meduna</sys_created_by>
+        <sys_created_on>2019-12-12 13:47:23</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_module">sys_ui_module</sys_db_object>
+        <sys_id>8e65480d989246148894e1d9b9e2fd90</sys_id>
+        <sys_metadata>125d8f28dbc1c090fd548ebe159619d0</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Language Processors</sys_name>
+        <sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope>
+        <sys_scope_delete display_value="">362dbac608e94152a0f202487d5a17f1</sys_scope_delete>
+        <sys_update_name>sys_ui_module_125d8f28dbc1c090fd548ebe159619d0</sys_update_name>
+        <sys_update_version display_value="sys_ui_module_125d8f28dbc1c090fd548ebe159619d0">103f93a7db298494fd548ebe159619cb</sys_update_version>
+        <sys_updated_by>martin.meduna</sys_updated_by>
+        <sys_updated_on>2019-12-12 13:47:23</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

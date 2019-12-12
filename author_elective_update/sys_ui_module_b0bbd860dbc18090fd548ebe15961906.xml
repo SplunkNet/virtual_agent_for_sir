@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_module">
+    <sys_ui_module action="DELETE">
+        <active>true</active>
+        <application display_value="Virtual Agent for SIR">b0bbd860dbc18090fd548ebe15961903</application>
+        <filter/>
+        <name>Return Messages</name>
+        <order/>
+        <path/>
+        <path_relative_to_root>false</path_relative_to_root>
+        <roles>sn_si.admin</roles>
+        <sys_class_name>sys_ui_module</sys_class_name>
+        <sys_created_by>martin.meduna</sys_created_by>
+        <sys_created_on>2019-11-07 19:19:14</sys_created_on>
+        <sys_domain>global</sys_domain>
+        <sys_domain_path>/</sys_domain_path>
+        <sys_id>b0bbd860dbc18090fd548ebe15961906</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Return Messages</sys_name>
+        <sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope>
+        <sys_update_name>sys_ui_module_b0bbd860dbc18090fd548ebe15961906</sys_update_name>
+        <sys_updated_by>martin.meduna</sys_updated_by>
+        <sys_updated_on>2019-11-07 19:19:14</sys_updated_on>
+        <table>x_snc_vasir_return_messages</table>
+        <uncancelable>false</uncancelable>
+        <view_name/>
+    </sys_ui_module>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</application>
+        <file_path/>
+        <instance_id>07d25f30db66b6047d8cf22ebf961961</instance_id>
+        <instance_name>mmsc2</instance_name>
+        <name>sys_ui_module_b0bbd860dbc18090fd548ebe15961906</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update sys_domain="global" table="sys_ui_module"><sys_ui_module action="INSERT_OR_UPDATE"><active>true</active><application display_value="Virtual Agent for SIR">b0bbd860dbc18090fd548ebe15961903</application><filter/><name>Return Messages</name><order/><path/><path_relative_to_root>false</path_relative_to_root><roles>sn_si.admin</roles><sys_class_name>sys_ui_module</sys_class_name><sys_created_by>martin.meduna</sys_created_by><sys_created_on>2019-11-07 19:19:14</sys_created_on><sys_domain>global</sys_domain><sys_domain_path>/</sys_domain_path><sys_id>b0bbd860dbc18090fd548ebe15961906</sys_id><sys_mod_count>0</sys_mod_count><sys_name>Return Messages</sys_name><sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package><sys_policy/><sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope><sys_update_name>sys_ui_module_b0bbd860dbc18090fd548ebe15961906</sys_update_name><sys_updated_by>martin.meduna</sys_updated_by><sys_updated_on>2019-11-07 19:19:14</sys_updated_on><table>x_snc_vasir_return_messages</table><uncancelable>false</uncancelable><view_name/></sys_ui_module></record_update>]]></payload>
+        <payload_hash>-1158973149</payload_hash>
+        <record_name>Return Messages</record_name>
+        <reverted_from/>
+        <source>c7a40625db684050fd548ebe15961964</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>martin.meduna</sys_created_by>
+        <sys_created_on>2019-11-07 19:19:14</sys_created_on>
+        <sys_id>34bbd860dbc18090fd548ebe15961909</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>16e474e74150000001</sys_recorded_at>
+        <sys_updated_by>martin.meduna</sys_updated_by>
+        <sys_updated_on>2019-11-07 19:19:14</sys_updated_on>
+        <type>Module</type>
+        <update_guid>3cbbd8600cc1809037f9e0dd2b94a408</update_guid>
+        <update_guid_history>3cbbd8600cc1809037f9e0dd2b94a408:-1158973149</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>martin.meduna</sys_created_by>
+        <sys_created_on>2019-12-12 13:47:19</sys_created_on>
+        <sys_db_object display_value="" name="sys_ui_module">sys_ui_module</sys_db_object>
+        <sys_id>02249ef5ed17401f8194dfbc6d17b639</sys_id>
+        <sys_metadata>b0bbd860dbc18090fd548ebe15961906</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Return Messages</sys_name>
+        <sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope>
+        <sys_scope_delete display_value="">362dbac608e94152a0f202487d5a17f1</sys_scope_delete>
+        <sys_update_name>sys_ui_module_b0bbd860dbc18090fd548ebe15961906</sys_update_name>
+        <sys_update_version display_value="sys_ui_module_b0bbd860dbc18090fd548ebe15961906">34bbd860dbc18090fd548ebe15961909</sys_update_version>
+        <sys_updated_by>martin.meduna</sys_updated_by>
+        <sys_updated_on>2019-12-12 13:47:19</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>

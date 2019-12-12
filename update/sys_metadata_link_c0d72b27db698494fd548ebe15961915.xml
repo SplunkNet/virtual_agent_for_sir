@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_metadata_link">
+    <sys_metadata_link action="INSERT_OR_UPDATE">
+        <directory>update</directory>
+        <documentkey>24c9df2edb45cc90fd548ebe1596198b</documentkey>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="x_snc_vasir_language_processor">
+    <x_snc_vasir_language_processor action="INSERT_OR_UPDATE">
+        <command>sir s -sys_id ${current_sir}</command>
+        <display/>
+        <encoded_query/>
+        <keywords/>
+        <name>Show details of opened sir</name>
+        <need_more_info>false</need_more_info>
+        <order>600</order>
+        <prompt/>
+        <regex>^show detail</regex>
+        <regex_group/>
+        <sys_created_by>martin.meduna</sys_created_by>
+        <sys_created_on>2019-11-14 14:18:26</sys_created_on>
+        <sys_id>24c9df2edb45cc90fd548ebe1596198b</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_updated_by>martin.meduna</sys_updated_by>
+        <sys_updated_on>2019-11-14 17:04:07</sys_updated_on>
+        <table_name/>
+        <variable_name/>
+    </x_snc_vasir_language_processor>
+</record_update>
+]]></payload>
+        <sys_class_name>sys_metadata_link</sys_class_name>
+        <sys_created_by>martin.meduna</sys_created_by>
+        <sys_created_on>2019-12-12 14:24:10</sys_created_on>
+        <sys_id>c0d72b27db698494fd548ebe15961915</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>Show details of opened sir</sys_name>
+        <sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope>
+        <sys_update_name>sys_metadata_link_c0d72b27db698494fd548ebe15961915</sys_update_name>
+        <sys_updated_by>martin.meduna</sys_updated_by>
+        <sys_updated_on>2019-12-12 14:24:10</sys_updated_on>
+        <tablename>x_snc_vasir_language_processor</tablename>
+    </sys_metadata_link>
+</record_update>

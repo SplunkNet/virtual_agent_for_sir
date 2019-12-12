@@ -9,35 +9,35 @@
         <hint/>
         <homepage/>
         <image/>
-        <link_type>LIST</link_type>
+        <link_type>DIRECT</link_type>
         <map_page/>
-        <mobile_title>Return Messages</mobile_title>
+        <mobile_title>Documentation</mobile_title>
         <mobile_view_name>Mobile</mobile_view_name>
-        <name>x_snc_vasir_return_messages</name>
-        <order>200</order>
+        <name/>
+        <order>300</order>
         <override_menu_roles>false</override_menu_roles>
-        <query/>
+        <query>/x_snc_vasir_documentation.do</query>
         <report/>
-        <roles>sn_si.admin</roles>
+        <roles/>
         <survey/>
         <survey_overwrite>true</survey_overwrite>
         <sys_class_name>sys_app_module</sys_class_name>
         <sys_created_by>martin.meduna</sys_created_by>
-        <sys_created_on>2019-11-07 19:19:13</sys_created_on>
+        <sys_created_on>2019-12-12 13:48:26</sys_created_on>
         <sys_domain>global</sys_domain>
         <sys_domain_path>/</sys_domain_path>
-        <sys_id>b0bb9860dbc18090fd548ebe159619ff</sys_id>
-        <sys_mod_count>2</sys_mod_count>
-        <sys_name>Messages</sys_name>
+        <sys_id>748f1ba7db298494fd548ebe159619c0</sys_id>
+        <sys_mod_count>3</sys_mod_count>
+        <sys_name>Documentation</sys_name>
         <sys_overrides/>
         <sys_package display_value="Virtual Agent for SIR" source="x_snc_vasir">4fa40625db684050fd548ebe15961961</sys_package>
         <sys_policy/>
         <sys_scope display_value="Virtual Agent for SIR">4fa40625db684050fd548ebe15961961</sys_scope>
-        <sys_update_name>sys_app_module_b0bb9860dbc18090fd548ebe159619ff</sys_update_name>
+        <sys_update_name>sys_app_module_748f1ba7db298494fd548ebe159619c0</sys_update_name>
         <sys_updated_by>martin.meduna</sys_updated_by>
-        <sys_updated_on>2019-12-12 13:46:18</sys_updated_on>
+        <sys_updated_on>2019-12-12 13:52:55</sys_updated_on>
         <timeline_page/>
-        <title>Messages</title>
+        <title>Documentation</title>
         <uncancelable>false</uncancelable>
         <view_name/>
         <window_name/>
